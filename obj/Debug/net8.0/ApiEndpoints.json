@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "Digital_Menu.Controllers.OrderController",
+    "Method": "GetOrdersForLocal",
+    "RelativePath": "api/Order/{localId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "localId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Digital_Menu.Controllers.OrderController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/Order/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "order",
+        "Type": "Digital_Menu.Models.CreateOrderDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
