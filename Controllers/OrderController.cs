@@ -27,6 +27,11 @@ namespace Digital_Menu.Controllers
                     .ThenInclude(o => o.Items)
                 .ToList();
 
+            foreach(var table in tables)
+            {
+                table.Orders = table.Orders.Where(o => o.isDeleted == false).ToList();
+            }
+
             return Ok(tables);
         }
 
@@ -74,6 +79,52 @@ namespace Digital_Menu.Controllers
                 order = newOrder.Id
             });
 
+        }
+
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateOrderStatusDto dto)
+        {
+            var order = await _db.Orders.FindAsync(id);
+
+            if (order == null) 
+                return NotFound();
+
+            order.Status = dto.Status;
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            var order = await _db.Orders.FindAsync(id);
+
+            if (order == null)
+                return NotFound();
+
+            if(order.isDeleted == true)
+            {
+                return Conflict("Order was alredy deleted");
+            }
+
+            order.isDeleted = true;
+            await _db.SaveChangesAsync();
+
+            return Ok();
+
+        }
+
+        [HttpGet("{localId}/history")]
+        public async Task<IActionResult> GetHistory(string localId)
+        {
+            var finishedOrders = await _db.Orders
+                .Include(o => o.Table)
+                .Include(o => o.Items)
+                .Where(o => o.isDeleted && o.Table.LocalId == localId)
+                .ToListAsync();
+
+            return Ok(finishedOrders);
         }
     }
 }

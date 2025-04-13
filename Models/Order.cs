@@ -11,6 +11,7 @@ namespace Digital_Menu.Models
         public int TableId { get; set; }
         [JsonIgnore] // da se izbegne ciklus prilikom slanja ka frontu
         public Table Table { get; set; }
+        public bool isDeleted { get; set; } = false;
 
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
     }

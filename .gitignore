@@ -1,0 +1,37 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.cache
+*.csproj.user
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore package directories
+node_modules/
+packages/
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore publish output
+wwwroot/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
